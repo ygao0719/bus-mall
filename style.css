@@ -1,0 +1,26 @@
+/* #left{
+  float: left;
+  margin-right:30px;
+}
+#middle{
+  margin-right:30px;
+} */
+
+h1{
+  text-align: center;
+}
+nav{
+  text-align: center;
+}
+ul li {
+  display: inline-block;
+}
+a{
+  text-decoration:none;
+  padding: 30px;
+  font-size:x-large;
+}
+section{
+  display: flex;
+  /* justify-content: space-between; */
+}
