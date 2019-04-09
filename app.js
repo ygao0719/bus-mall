@@ -3,10 +3,10 @@
 //global variables
 var allPic = [];
 var roundOfTurn = 25;
-var picChart;
 var leftPic = document.getElementById('left');
 var middlePic = document.getElementById('middle');
 var rightPic = document.getElementById('right');
+
 
 function Picture(name) {
   // images/sassy-goat.jpg
@@ -48,49 +48,59 @@ function updateChartArrays(){
     names[i] = allPic[i].name;
   }
 }
+
 function showRandomPic(){
+  var myMap = new Map();
+  myMap.set(leftPic.title, '');
+  myMap.set(middlePic.title, '');
+  myMap.set(rightPic.title, '');
+  console.log(myMap);
+
   var ramdom1 = Math.floor(Math.random() * allPic.length);
   var ramdom2 = Math.floor(Math.random() * allPic.length);
   var ramdom3 = Math.floor(Math.random() * allPic.length);
-
-  while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3) {
+  //get rid of the duplicates in 3 pics
+  console.log(myMap.size);
+  while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3 ||
+      myMap.has(allPic[ramdom1].name)||
+      myMap.has(allPic[ramdom2].name)||
+      myMap.has(allPic[ramdom3].name)) {
     ramdom1 = Math.floor(Math.random() * allPic.length);
     ramdom2 = Math.floor(Math.random() * allPic.length);
     ramdom3 = Math.floor(Math.random() * allPic.length);
     console.log('duplicate found');
   }
 
+  //increment of views
   allPic[ramdom1].view += 1;
   allPic[ramdom2].view += 1;
   allPic[ramdom3].view += 1;
-
+  //left random pictures
   leftPic.src = allPic[ramdom1].filepath;
   leftPic.alt = allPic[ramdom1].name;
   leftPic.title = allPic[ramdom1].name;
-
+  //middle random pictures
   middlePic.src = allPic[ramdom2].filepath;
   middlePic.alt = allPic[ramdom2].name;
   middlePic.title = allPic[ramdom2].name;
-
+  //right random pictures
   rightPic.src = allPic[ramdom3].filepath;
   rightPic.alt = allPic[ramdom3].name;
   rightPic.title = allPic[ramdom3].name;
-  console.log('currently showing before generating new ramdom', leftPic.alt,middlePic.alt,rightPic.alt);
+  console.log('currently showing before generating new ramdom: ', leftPic.alt,middlePic.alt,rightPic.alt);
+
 
 }
-
 function handlePicClick(event) {
-  console.log(event.target);
   for(var i = 0; i < allPic.length;i++){
-    // console.log('i am running');
     if( allPic[i].name === event.target.title){
       allPic[i].click++;
       updateChartArrays();
-      // console.log(allPic[i].click);
     }
   }
-  if(roundOfTurn>0){
+  if(roundOfTurn > 1){
     showRandomPic();
+    console.log(event.target);
   }
   //last chance
   else{
@@ -98,6 +108,7 @@ function handlePicClick(event) {
     leftPic.removeEventListener('click',handlePicClick);
     middlePic.removeEventListener('click',handlePicClick);
     rightPic.removeEventListener('click',handlePicClick);
+    drawChart();
   }
   roundOfTurn --;
 }
@@ -117,27 +128,58 @@ rightPic.addEventListener('click', handlePicClick);
 var data = {
   labels: names, // names array we declared earlier
   datasets: [{
+    label: 'Votes',
     data: clicks, // clicks array we declared earlier
     backgroundColor: [
       'bisque',
       'darkgray',
       'burlywood',
       'lightblue',
-      'navy'
+      'navy',
+      'salmon',
+      'darksalmon',
+      'lightcoral',
+      'indianred',
+      'crimson',
+      'lightgoldenrodyellow',
+      'papayawhip',
+      'moccasin',
+      'peachpuff',
+      'palegoldenrod',
+      'aqua',
+      'aquamarine',
+      'lightskyblue',
+      'skyblue',
+      'deepskyblue',
     ],
     hoverBackgroundColor: [
       'purple',
       'purple',
       'purple',
       'purple',
-      'purple'
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
     ]
   }]
 };
 
 function drawChart() {
   var ctx = document.getElementById('funky-chart').getContext('2d');
-  picChart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
     data: data,
     options: {
@@ -151,21 +193,7 @@ function drawChart() {
     }
   });
 }
-// chartDrawn = true;
 
-drawChart();
-// function hideChart() {
-//   document.getElementById('funky-chart').hidden = true;
-// }
-// hideChart();
-// // ++++++++++++++++++++++++++++++++++++++++++++
-// // EVENT LISTENERS
-// // ++++++++++++++++++++++++++++++++++++++++++++
-
-// document.getElementById('funcky-chart').addEventListener('click', function() {
-//   drawChart();
-//   console.log('chart was drawn');
-// });
 
 
 
