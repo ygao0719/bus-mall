@@ -1,11 +1,16 @@
-/* #left{
-  float: left;
-  margin-right:30px;
+#left{
+  margin-left: 250px;
+  max-width: 300px;
+  max-height: 300px;
 }
 #middle{
-  margin-right:30px;
-} */
-
+  max-width: 300px;
+  max-height: 300px;
+}
+#right{
+  max-width: 300px;
+  max-height: 300px;
+}
 h1{
   text-align: center;
 }
@@ -21,6 +26,6 @@ a{
   font-size:x-large;
 }
 section{
-  display: flex;
-  /* justify-content: space-between; */
+  margin-top: 30px;
+  display: inline-block;  
 }

@@ -2,6 +2,7 @@
 
 //global variables
 var allPic = [];
+var roundOfTurn = 25;
 var leftPic = document.getElementById('left');
 var middlePic = document.getElementById('middle');
 var rightPic = document.getElementById('right');
@@ -36,21 +37,24 @@ new Picture('usb');
 new Picture('water-can');
 new Picture('wine-glass');
 
-
-
-// var previous;
 function showRandomPic(){
   var ramdom1 = Math.floor(Math.random() * allPic.length);
   var ramdom2 = Math.floor(Math.random() * allPic.length);
   var ramdom3 = Math.floor(Math.random() * allPic.length);
   
-  // console.log('currently showing before generating new ramdom', allPic.alt);
-  // while (goatpic.alt === allGoats[ramdom].name) {
-  //   var ramdom = Math.floor(Math.random() * allGoats.length);
-  //   console.log('duplicate found');
-  // }
-  // previous = ramdom;
-  // allPic[ramdom].view += 1;
+  console.log('currently showing before generating new ramdom', leftPic.alt,middlePic.alt,rightPic.alt);
+  while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3) {
+    ramdom1 = Math.floor(Math.random() * allPic.length);
+    ramdom2 = Math.floor(Math.random() * allPic.length);
+    ramdom3 = Math.floor(Math.random() * allPic.length);
+    console.log('duplicate found');
+  }
+
+  // allPic[ramdom1].click += 1;
+  // allPic[ramdom2].click += 1;
+  // allPic[ramdom3].click += 1;
+
+
   leftPic.src = allPic[ramdom1].filepath;
   leftPic.alt = allPic[ramdom1].name;
   leftPic.title = allPic[ramdom1].name;
@@ -68,6 +72,16 @@ function showRandomPic(){
 function handlePicClick(event) {
   console.log(event.target);
   showRandomPic();
+  if (roundOfTurn === 0){
+    console.log('you hit the last chance');
+    leftPic.removeEventListener('click',handlePicClick);
+    middlePic.removeEventListener('click',handlePicClick);
+    rightPic.removeEventListener('click',handlePicClick);
+  }
+  roundOfTurn --;
+
+  // allPic[].click += 1;
+  // console.log(allPic[].click);
 }
 
 showRandomPic();
@@ -75,3 +89,5 @@ showRandomPic();
 leftPic.addEventListener('click', handlePicClick);
 middlePic.addEventListener('click', handlePicClick);
 rightPic.addEventListener('click', handlePicClick);
+
+
