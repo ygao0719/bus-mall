@@ -7,6 +7,7 @@ var leftPic = document.getElementById('left');
 var middlePic = document.getElementById('middle');
 var rightPic = document.getElementById('right');
 
+
 function Picture(name) {
   // images/sassy-goat.jpg
   this.filepath = `img/${name}.jpg`;
@@ -47,12 +48,23 @@ function updateChartArrays(){
     names[i] = allPic[i].name;
   }
 }
+
 function showRandomPic(){
+  var myMap = new Map();
+  myMap.set(leftPic.title, '');
+  myMap.set(middlePic.title, '');
+  myMap.set(rightPic.title, '');
+  console.log(myMap);
+
   var ramdom1 = Math.floor(Math.random() * allPic.length);
   var ramdom2 = Math.floor(Math.random() * allPic.length);
   var ramdom3 = Math.floor(Math.random() * allPic.length);
-
-  while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3) {
+  //get rid of the duplicates in 3 pics
+  console.log(myMap.size);
+  while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3 ||
+      myMap.has(allPic[ramdom1].name)||
+      myMap.has(allPic[ramdom2].name)||
+      myMap.has(allPic[ramdom3].name)) {
     ramdom1 = Math.floor(Math.random() * allPic.length);
     ramdom2 = Math.floor(Math.random() * allPic.length);
     ramdom3 = Math.floor(Math.random() * allPic.length);
@@ -75,23 +87,20 @@ function showRandomPic(){
   rightPic.src = allPic[ramdom3].filepath;
   rightPic.alt = allPic[ramdom3].name;
   rightPic.title = allPic[ramdom3].name;
-  console.log('currently showing before generating new ramdom', leftPic.alt,middlePic.alt,rightPic.alt);
+  console.log('currently showing before generating new ramdom: ', leftPic.alt,middlePic.alt,rightPic.alt);
+
 
 }
-
 function handlePicClick(event) {
   for(var i = 0; i < allPic.length;i++){
-    // console.log('i am running');
     if( allPic[i].name === event.target.title){
       allPic[i].click++;
       updateChartArrays();
-      // console.log(allPic[i].click);
     }
   }
-  if(roundOfTurn > 0){
+  if(roundOfTurn > 1){
     showRandomPic();
     console.log(event.target);
-
   }
   //last chance
   else{
@@ -148,7 +157,22 @@ var data = {
       'purple',
       'purple',
       'purple',
-      'purple'
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple',
     ]
   }]
 };
