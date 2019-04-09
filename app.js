@@ -3,6 +3,7 @@
 //global variables
 var allPic = [];
 var roundOfTurn = 25;
+var picChart;
 var leftPic = document.getElementById('left');
 var middlePic = document.getElementById('middle');
 var rightPic = document.getElementById('right');
@@ -37,11 +38,21 @@ new Picture('usb');
 new Picture('water-can');
 new Picture('wine-glass');
 
+//Arrays to hold data for the chart
+var clicks = [];
+var names = [];
+
+function updateChartArrays(){
+  for (var i = 0; i < allPic.length;i++){
+    clicks[i] = allPic[i].click;
+    names[i] = allPic[i].name;
+  }
+}
 function showRandomPic(){
   var ramdom1 = Math.floor(Math.random() * allPic.length);
   var ramdom2 = Math.floor(Math.random() * allPic.length);
   var ramdom3 = Math.floor(Math.random() * allPic.length);
-  
+
   while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3) {
     ramdom1 = Math.floor(Math.random() * allPic.length);
     ramdom2 = Math.floor(Math.random() * allPic.length);
@@ -52,7 +63,6 @@ function showRandomPic(){
   allPic[ramdom1].view += 1;
   allPic[ramdom2].view += 1;
   allPic[ramdom3].view += 1;
-
 
   leftPic.src = allPic[ramdom1].filepath;
   leftPic.alt = allPic[ramdom1].name;
@@ -71,12 +81,12 @@ function showRandomPic(){
 
 function handlePicClick(event) {
   console.log(event.target);
-  // showRandomPic();
   for(var i = 0; i < allPic.length;i++){
     // console.log('i am running');
-    if(event.target.title === allPic[i].name){
+    if( allPic[i].name === event.target.title){
       allPic[i].click++;
-      console.log(allPic[i].click);
+      updateChartArrays();
+      // console.log(allPic[i].click);
     }
   }
   if(roundOfTurn>0){
@@ -97,5 +107,65 @@ showRandomPic();
 leftPic.addEventListener('click', handlePicClick);
 middlePic.addEventListener('click', handlePicClick);
 rightPic.addEventListener('click', handlePicClick);
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// CHART STUFF
+// Charts rendered using Chart JS v.2.7.2
+// http://www.chartjs.org/
+// ++++++++++++++++++++++++++++++++++++++++++++
+
+var data = {
+  labels: names, // names array we declared earlier
+  datasets: [{
+    data: clicks, // clicks array we declared earlier
+    backgroundColor: [
+      'bisque',
+      'darkgray',
+      'burlywood',
+      'lightblue',
+      'navy'
+    ],
+    hoverBackgroundColor: [
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple'
+    ]
+  }]
+};
+
+function drawChart() {
+  var ctx = document.getElementById('funky-chart').getContext('2d');
+  picChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+// chartDrawn = true;
+
+drawChart();
+// function hideChart() {
+//   document.getElementById('funky-chart').hidden = true;
+// }
+// hideChart();
+// // ++++++++++++++++++++++++++++++++++++++++++++
+// // EVENT LISTENERS
+// // ++++++++++++++++++++++++++++++++++++++++++++
+
+// document.getElementById('funcky-chart').addEventListener('click', function() {
+//   drawChart();
+//   console.log('chart was drawn');
+// });
+
 
 
