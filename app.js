@@ -42,7 +42,6 @@ function showRandomPic(){
   var ramdom2 = Math.floor(Math.random() * allPic.length);
   var ramdom3 = Math.floor(Math.random() * allPic.length);
   
-  console.log('currently showing before generating new ramdom', leftPic.alt,middlePic.alt,rightPic.alt);
   while (ramdom1 === ramdom2 || ramdom1 === ramdom3 || ramdom2 === ramdom3) {
     ramdom1 = Math.floor(Math.random() * allPic.length);
     ramdom2 = Math.floor(Math.random() * allPic.length);
@@ -50,9 +49,9 @@ function showRandomPic(){
     console.log('duplicate found');
   }
 
-  // allPic[ramdom1].click += 1;
-  // allPic[ramdom2].click += 1;
-  // allPic[ramdom3].click += 1;
+  allPic[ramdom1].view += 1;
+  allPic[ramdom2].view += 1;
+  allPic[ramdom3].view += 1;
 
 
   leftPic.src = allPic[ramdom1].filepath;
@@ -66,22 +65,31 @@ function showRandomPic(){
   rightPic.src = allPic[ramdom3].filepath;
   rightPic.alt = allPic[ramdom3].name;
   rightPic.title = allPic[ramdom3].name;
+  console.log('currently showing before generating new ramdom', leftPic.alt,middlePic.alt,rightPic.alt);
 
 }
 
 function handlePicClick(event) {
   console.log(event.target);
-  showRandomPic();
-  if (roundOfTurn === 0){
+  // showRandomPic();
+  for(var i = 0; i < allPic.length;i++){
+    console.log('i am running');
+    if(event.target.title === allPic[i].name){
+      allPic[i].click++;
+      console.log(allPic[i].click);
+    }
+  }
+  if(roundOfTurn>0){
+    showRandomPic();
+  }
+  //last chance
+  else{
     console.log('you hit the last chance');
     leftPic.removeEventListener('click',handlePicClick);
     middlePic.removeEventListener('click',handlePicClick);
     rightPic.removeEventListener('click',handlePicClick);
   }
   roundOfTurn --;
-
-  // allPic[].click += 1;
-  // console.log(allPic[].click);
 }
 
 showRandomPic();
