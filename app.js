@@ -73,7 +73,7 @@ function handlePicClick(event) {
   console.log(event.target);
   // showRandomPic();
   for(var i = 0; i < allPic.length;i++){
-    console.log('i am running');
+    // console.log('i am running');
     if(event.target.title === allPic[i].name){
       allPic[i].click++;
       console.log(allPic[i].click);
