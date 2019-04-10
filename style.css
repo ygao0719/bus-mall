@@ -29,3 +29,18 @@ section{
   margin-top: 30px;
   display: inline-block;  
 }
+#votes li{
+  list-style-type: circle;
+  display: block;
+  color: rgb(14, 17, 19);
+}
+#clear{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}

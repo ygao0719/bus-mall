@@ -107,6 +107,14 @@ function handlePicClick(event) {
     leftPic.removeEventListener('click',handlePicClick);
     middlePic.removeEventListener('click',handlePicClick);
     rightPic.removeEventListener('click',handlePicClick);
+    //list of vote info
+    var votesInfo = document.getElementById('votes');
+    for(var j = 0; j < allPic.length; j++){
+      console.log(allPic[j].click + ' votes for the ' + allPic[j].name);
+      var liEL = document.createElement('li');
+      liEL.textContent = allPic[j].click + ' votes for the ' + allPic[j].name;
+      votesInfo.appendChild(liEL);
+    }
     drawChart();
     localStorage.setItem('imgData', JSON.stringify(allPic));
   }
@@ -128,6 +136,15 @@ else{
   console.log('Storage doesn\'t exist.');
 }
 
+// event to clear storage
+var clearStorage = document.getElementById('clear');
+if(clearStorage){
+  clearStorage.addEventListener('click', clearAll);
+}
+function clearAll(){
+  localStorage.clear();
+  alert('You just clear all data!');
+}
 
 
 // ++++++++++++++++++++++++++++++++++++++++++++
