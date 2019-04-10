@@ -89,7 +89,6 @@ function showRandomPic(){
   rightPic.title = allPic[ramdom3].name;
   console.log('currently showing before generating new ramdom: ', leftPic.alt,middlePic.alt,rightPic.alt);
 
-
 }
 function handlePicClick(event) {
   for(var i = 0; i < allPic.length;i++){
@@ -109,6 +108,7 @@ function handlePicClick(event) {
     middlePic.removeEventListener('click',handlePicClick);
     rightPic.removeEventListener('click',handlePicClick);
     drawChart();
+    localStorage.setItem('imgData', JSON.stringify(allPic));
   }
   roundOfTurn --;
 }
@@ -118,6 +118,17 @@ showRandomPic();
 leftPic.addEventListener('click', handlePicClick);
 middlePic.addEventListener('click', handlePicClick);
 rightPic.addEventListener('click', handlePicClick);
+
+// function checkStorage
+if(localStorage.imgData){
+  console.log('data exists.');
+  allPic= JSON.parse(localStorage.imgData);
+}
+else{
+  console.log('Storage doesn\'t exist.');
+}
+
+
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // CHART STUFF
