@@ -29,3 +29,7 @@ section{
   margin-top: 30px;
   display: inline-block;  
 }
+#votes li{
+  display: block;
+  color: rgb(14, 17, 19);
+}
