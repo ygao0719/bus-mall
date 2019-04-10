@@ -89,7 +89,6 @@ function showRandomPic(){
   rightPic.title = allPic[ramdom3].name;
   console.log('currently showing before generating new ramdom: ', leftPic.alt,middlePic.alt,rightPic.alt);
 
-
 }
 function handlePicClick(event) {
   for(var i = 0; i < allPic.length;i++){
