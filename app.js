@@ -116,6 +116,7 @@ function handlePicClick(event) {
       votesInfo.appendChild(liEL);
     }
     drawChart();
+    localStorage.setItem('imgData', JSON.stringify(allPic));
   }
   roundOfTurn --;
 }
@@ -125,6 +126,26 @@ showRandomPic();
 leftPic.addEventListener('click', handlePicClick);
 middlePic.addEventListener('click', handlePicClick);
 rightPic.addEventListener('click', handlePicClick);
+
+// function checkStorage
+if(localStorage.imgData){
+  console.log('data exists.');
+  allPic= JSON.parse(localStorage.imgData);
+}
+else{
+  console.log('Storage doesn\'t exist.');
+}
+
+// event to clear storage
+var clearStorage = document.getElementById('clear');
+if(clearStorage){
+  clearStorage.addEventListener('click', clearAll);
+}
+function clearAll(){
+  localStorage.clear();
+  alert('You just clear all data!');
+}
+
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // CHART STUFF
