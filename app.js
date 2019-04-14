@@ -7,7 +7,6 @@ var leftPic = document.getElementById('left');
 var middlePic = document.getElementById('middle');
 var rightPic = document.getElementById('right');
 
-
 function Picture(name) {
   // images/sassy-goat.jpg
   this.filepath = `img/${name}.jpg`;

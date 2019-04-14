@@ -2,15 +2,22 @@
   margin-left: 250px;
   max-width: 300px;
   max-height: 300px;
+  border: 10px solid transparent;
+  border-color: #4CAF50;
 }
 #middle{
   max-width: 300px;
   max-height: 300px;
+  border: 10px solid transparent;
+  border-color: #4CAF50;
 }
 #right{
   max-width: 300px;
   max-height: 300px;
+  border: 10px solid transparent;
+  border-color: #4CAF50;
 }
+
 h1{
   text-align: center;
 }
